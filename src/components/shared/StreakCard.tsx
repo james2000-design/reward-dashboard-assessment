@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
-import { useAuth } from "../context/AuthContext";
+import { supabase } from "../../lib/supabase";
+import { useAuth } from "../../context/AuthContext";
 
 export default function StreakCard() {
   const [streak, setStreak] = useState(0);
@@ -8,29 +8,34 @@ export default function StreakCard() {
   const { user } = useAuth();
 
   useEffect(() => {
+    const load = async () => {
+      if (!user) return;
+
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("streak, last_claim_date")
+        .eq("id", user.id)
+        .single();
+
+      if (error || !data) return;
+
+      setStreak(data.streak);
+      setClaimed(
+        data.last_claim_date === new Date().toISOString().split("T")[0]
+      );
+    };
     load();
-  }, []);
-
-  const load = async () => {
-    const { data } = await supabase
-      .from("profiles")
-      .select("streak, last_claim_date")
-      .single();
-
-    if (!data) return;
-
-    setStreak(data.streak);
-    setClaimed(data.last_claim_date === new Date().toISOString().split("T")[0]);
-  };
+  }, [user]);
 
   const claim = async () => {
     const today = new Date().toISOString().split("T")[0];
     if (!user) return;
 
     // get current points
-    const { data: pData, error: pErr } = await supabase
+    const { data: pData } = await supabase
       .from("profiles")
       .select("points")
+      .eq("id", user.id)
       .single();
     const currentPoints = pData?.points ?? 0;
     const newPoints = currentPoints + 5;
@@ -38,7 +43,7 @@ export default function StreakCard() {
     const { error } = await supabase
       .from("profiles")
       .update({ streak: streak + 1, points: newPoints, last_claim_date: today })
-      .single();
+      .eq("id", user.id);
 
     if (!error) {
       // log the points change

@@ -8,7 +8,7 @@ export default function AuthPage() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isLoginView, setIsLoginView] = useState(true); // true = login, false = signup
+  const [isLoginView, setIsLoginView] = useState(true);
   const [error, setError] = useState("");
 
   const signIn = async () => {
@@ -132,57 +132,67 @@ export default function AuthPage() {
 
             {/* Password input */}
             <div>
-              <div className="flex justify-between items-center mb-2">
-                <label className="block text-sm font-semibold text-gray-900">
-                  Password
-                </label>
+              <label className="block text-sm font-semibold text-gray-900 mb-2">
+                Password
+              </label>
+
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="w-full px-4 py-3 pr-16 border border-gray-200 rounded-lg
+                 focus:ring-2 focus:ring-purple-500 focus:border-purple-500
+                 outline-none transition bg-gray-50"
+                  disabled={loading}
+                />
+
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="text-sm text-purple-600 hover:text-purple-800 transition font-medium"
                   disabled={loading}
+                  className="absolute right-4 top-1/2 -translate-y-1/2
+                 text-sm text-purple-600 font-medium
+                 hover:text-purple-800 transition"
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
               </div>
-              <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition bg-gray-50"
-                disabled={loading}
-              />
             </div>
 
-            {/* Confirm Password (only for signup) */}
             {!isLoginView && (
               <div>
-                <div className="flex justify-between items-center mb-2">
-                  <label className="block text-sm font-semibold text-gray-900">
-                    Confirm Password
-                  </label>
+                <label className="block text-sm font-semibold text-gray-900 mb-2">
+                  Confirm Password
+                </label>
+
+                <div className="relative">
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="w-full px-4 py-3 pr-16 border border-gray-200 rounded-lg
+                 focus:ring-2 focus:ring-purple-500 focus:border-purple-500
+                 outline-none transition bg-gray-50"
+                    disabled={loading}
+                  />
+
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="text-sm text-purple-600 hover:text-purple-800 transition font-medium"
                     disabled={loading}
+                    className="absolute right-4 top-1/2 -translate-y-1/2
+                 text-sm text-purple-600 font-medium
+                 hover:text-purple-800 transition"
                   >
                     {showConfirmPassword ? "Hide" : "Show"}
                   </button>
                 </div>
-                <input
-                  type={showConfirmPassword ? "text" : "password"}
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-500 outline-none transition bg-gray-50"
-                  disabled={loading}
-                />
               </div>
             )}
 
-            {/* Forgot Password (only for login) */}
             {isLoginView && (
               <div className="text-right -mt-2">
                 <a
@@ -198,7 +208,6 @@ export default function AuthPage() {
               </div>
             )}
 
-            {/* Primary Action Button */}
             <button
               onClick={isLoginView ? signIn : signUp}
               disabled={loading}
@@ -213,7 +222,6 @@ export default function AuthPage() {
                 : "Sign up Account"}
             </button>
 
-            {/* Divider */}
             <div className="relative flex items-center justify-center">
               <div className="border-t border-gray-200 w-full"></div>
               <span className="absolute bg-white px-4 text-gray-500 text-sm">
@@ -248,7 +256,6 @@ export default function AuthPage() {
               Sign in with Google
             </button>
 
-            {/* Toggle between Login and Signup */}
             <div className="text-center pt-2">
               <p className="text-gray-600">
                 {isLoginView
