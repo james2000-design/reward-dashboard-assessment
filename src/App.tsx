@@ -6,7 +6,7 @@ import "./index.css";
 function App() {
   const { user, loading } = useAuth();
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p className="text-center">Loading...</p>;
 
   return user ? <RewardsHub /> : <AuthPage />;
 }
