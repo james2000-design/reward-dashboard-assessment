@@ -42,6 +42,16 @@ To get the project up and running, follow these steps:
 
 ## Vite Plugins
 
+## Assumptions & Trade-offs
+
+- Assumed Supabase Auth would handle authentication and session management.
+- Used client-side rendering for simplicity and faster development.
+- Prioritized core user flows over edge-case handling due to time constraints.
+- Limited error handling to common cases to keep the codebase clean.
+- I prioritized core functionality over advanced animations due to time constraints.
+- I did not implement unit tests due to time constraints.
+- With more time, I would add comprehensive tests, improve accessibility, and optimize performance.
+
 This project utilizes the following official Vite plugins for React:
 
 - **[@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react)**: Uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh, enabling quick updates during development.
