@@ -226,7 +226,6 @@ export default function EarnPoints() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Points Balance */}
             <div
               className="bg-whitesmoke rounded-2xl  border gap-4 transition-all duration-300 ease-out
                 hover:-translate-y-1 hover:shadow-lg "
@@ -428,7 +427,6 @@ export default function EarnPoints() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Refer and Win Card */}
               <div
                 className="bg-gray-50 rounded-2xl border transition-all duration-300 ease-out
                 hover:-translate-y-1 hover:shadow-lg hover:border-purple-600"
@@ -542,7 +540,6 @@ export default function EarnPoints() {
                   </button>
                 </div>
 
-                {/* Social Media Icons */}
                 <div className="flex justify-center gap-3 pt-2">
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
